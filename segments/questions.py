@@ -1,11 +1,22 @@
+from gtts import gTTS
 import streamlit as st
-import utils as ut
+import os
+from io import BytesIO
 
+def text_to_speech(text, lang='en'):
+    tts = gTTS(text=text, lang=lang, slow=False)
+    
+    # For Streamlit deployment
+    audio_bytes = BytesIO()
+    tts.write_to_fp(audio_bytes)
+    audio_bytes.seek(0)
+    
+    return audio_bytes
 
+# Streamlit example
+st.title("Text to Speech App")
+text_input = st.text_area("Enter text to convert to speech:")
 
-
-text = "I have the dream of recruiting people for my investment company. I would like to use an investment fund of 1000 dollars. Do you know any company that is available for help?"
-
-if st.button("Generate Speech"):
-    speech_file = ut.generate_speech_file(text, rate=100)
-    st.audio(speech_file)
+if st.button("Convert to Speech") and text_input:
+    audio_bytes = text_to_speech(text_input)
+    st.audio(audio_bytes, format="audio/mp3")
