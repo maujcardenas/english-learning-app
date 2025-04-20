@@ -13,7 +13,8 @@ def text_to_speech(text, lang='en'):
     return audio_bytes
 
 def load_working_vocab_df():
-    df= pd.read_csv("english-vocab.csv",
+    data_url="https://filedn.com/llTxljrCR1aJEFsp4DXfExJ/english-learning-app/data/english-vocab.csv"
+    df= pd.read_csv(data_url,
                     sep=',', skiprows=1, 
                     names=['category','sub-category', 'word', 'type', 'example'], 
                     encoding="utf-8", engine='python', quotechar='"', doublequote=True)
