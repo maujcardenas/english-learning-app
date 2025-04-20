@@ -38,30 +38,27 @@ for index, row in filtered_df.iterrows():
     
     
     # Construct audio file paths
-    word_audio_path = os.path.join("english_audio", f"{row['sub-category'].strip()}-{row['word'].strip()}") + '.mp3'
-
-
-    example_audio_path = os.path.join("english_audio", f"{row['sub-category'].strip()}-{row['word'].strip()}-example")+'.mp3'
+    # word_audio_path = os.path.join("english_audio", f"{row['sub-category'].strip()}-{row['word'].strip()}") + '.mp3'
+    word_au_path=f'https://filedn.com/llTxljrCR1aJEFsp4DXfExJ/english-learning-app/english_audio/{row['sub-category'].strip()}-{row['word'].strip()}.mp3'
+    # example_audio_path = os.path.join("english_audio", f"{row['sub-category'].strip()}-{row['word'].strip()}-example")+'.mp3'
+    example_au_path=f'https://filedn.com/llTxljrCR1aJEFsp4DXfExJ/english-learning-app/english_audio/{row['sub-category'].strip()}-{row['word'].strip()}-example.mp3'
 
     # Display audio players
     col1, col2 = st.columns(2)
     
     with col1:
         st.markdown(f'#### {word}')
-        if os.path.exists(word_audio_path):
-            st.audio(word_audio_path)
-        else:
-            st.warning("Word audio file not found")
+        st.audio(word_au_path)
+        # if os.path.exists(word_au_path):
+        # else:
+        #     st.warning("Word audio file not found")
     
     with col2:
         st.markdown(f'#### {example_sentence}')
-        if os.path.exists(example_audio_path):
-            st.audio(example_audio_path)
-        else:
-            st.warning("Example audio file not found")
+        st.audio(example_au_path)
+        # if os.path.exists(example_audio_path):
+        #     st.audio(example_audio_path)
+        # else:
+        #     st.warning("Example audio file not found")
     
     st.markdown("---")
-
-# Optional: Add some styling or additional information at the bottom
-st.markdown("### Notes")
-st.info("Select a category and subcategory to view vocabulary words with their examples and audio recordings.")
